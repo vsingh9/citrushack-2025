@@ -11,8 +11,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static const List<Widget> _pages = <Widget>[
     Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Matches Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Messages Page', style: TextStyle(fontSize: 24))),
+    Center(child: Text('Groups Page', style: TextStyle(fontSize: 24))),
     Center(child: Text('Account Page', style: TextStyle(fontSize: 24))),
   ];
 
@@ -35,12 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.directions_car),
-            label: 'Matches',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Messages',
+            icon: Icon(Icons.group),
+            label: 'Groups',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
