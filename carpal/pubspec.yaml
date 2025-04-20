@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.7  # Or the latest version
   google_sign_in: ^6.1.5  # or the latest version
+  firebase_auth: ^4.0.0
   
 
 dev_dependencies:
