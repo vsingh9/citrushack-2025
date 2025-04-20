@@ -38,6 +38,7 @@ class OpeningScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // Navigate to login screen placeholder
+                  Navigator.pushNamed(context, '/login');
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
@@ -52,6 +53,7 @@ class OpeningScreen extends StatelessWidget {
               OutlinedButton(
                 onPressed: () {
                   // Navigate to create account screen placeholder
+                  Navigator.pushNamed(context, '/signup');
                 },
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(color: Colors.green, width: 2),
