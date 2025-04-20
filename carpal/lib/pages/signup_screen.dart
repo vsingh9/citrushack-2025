@@ -1,6 +1,7 @@
 // pages/signup_screen.dart
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -12,23 +13,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController ageController = TextEditingController();
   String gender = 'Male';
 
-  Future<void> _handleGoogleSignIn() async {
-    try {
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-      final GoogleSignInAccount? account = await googleSignIn.signIn();
+  signInWithGoogle() async {
+      // Initialize Firebase Auth
+      GoogleSignIn googleSignIn = GoogleSignIn();
+      GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
-      if (account != null) {
-        // Optional: You can store user info here using SharedPreferences or Firebase
-        Navigator.pushReplacementNamed(context, '/home');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Google sign-in canceled.')),
-        );
-      }
-    } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Sign-in failed: $error')),
+      GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
       );
+      
+
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      print(userCredential.user?.displayName); // Print the user ID for debugging
+      // Check if the user is successfully signed in
+      FirebaseAuth.instance.signInWithCredential(credential);  
+      
+      
+    //   if (googleUser != null) {
+    //     // Optional: You can store user info here using SharedPreferences or Firebase
+    //     Navigator.pushReplacementNamed(context, '/home');
+    //   } else {
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(content: Text('Google sign-in canceled.')),
+    //     );
+    //   }
+    // } catch (error) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text('Sign-in failed: $error')),
+    //   );
     }
   }
 
@@ -67,7 +81,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _handleGoogleSignIn,
+              onPressed: signInWithGoogle(),
               child: Text('Sign in with Google'),
             ),
           ],
